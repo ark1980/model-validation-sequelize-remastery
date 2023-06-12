@@ -17,6 +17,22 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+       len: {
+          args: [2, 22],
+          msg: "Color name must be between 2 and 22 characters"
+        },
+        // noEndingInY(value) {
+        //   if(value.slice(-1) === 'y') {
+        //     throw new Error('name must not end in \'y\'');
+        //   }
+        // }
+        isEndingInY (value) {
+          if (value[value.length - 1] === "y") {
+            throw new Error("Name must not end in 'y'");
+          }
+        }
+      }
     }
   }, {
     sequelize,
